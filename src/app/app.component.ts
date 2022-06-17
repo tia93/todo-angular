@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { timestamp } from 'rxjs';
 import { TodoClass, TodoPriority } from './model/todo-class';
 import { fromPriorityToColor, fromPriorityToDescr, TodoInterface } from './model/todo-interface';
-import { TODOS, TODOS_I } from './model/todos-mock';
+import { TODOS, TODOS2, TODOS_I } from './model/todos-mock';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
 
   constructor(){
     this.todosArray = TODOS; 
+    
   }
 
 
@@ -29,6 +30,10 @@ export class AppComponent implements OnInit {
     // console.log(nuoviTodos);
   }
   
+  toLuxuryMode(){
+    this.todosArray = TODOS2 // non funziona 
+  }
+
   getCorrectDate(timestamp: number): Date{
     const milliseconds = timestamp * 1000;
     return new Date(milliseconds);

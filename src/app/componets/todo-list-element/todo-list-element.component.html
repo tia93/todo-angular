@@ -1,8 +1,9 @@
 
-<div *ngIf="todo" [style.background-color]="todo.color"  class="todo-card"> crea todo element
+<div *ngIf="todo" [style.background-color]="todo.color"  class="todo-card"> 
+  <!-- crea todo element -->
     <span>{{todo.name}}</span>
     <span>{{todo.creationDate}}</span>
     <span>{{todo.priority}}</span>
     <span>{{todo.description}}</span>
-    
+    <button (click)="todoCompleted()">completato</button>
   </div>

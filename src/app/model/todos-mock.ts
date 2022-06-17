@@ -13,7 +13,17 @@ TODOS.push(todo2);
 TODOS.push(todo3);
 TODOS.push(todo4);
 
+export const TODOS2: TodoClass[] = [];
 
+const todo5 = new TodoClass('bere piu acqua ', [], new Date(), TodoPriority.VERYHIGH);
+const todo6 = new TodoClass('andare in vacanza');
+const todo7 = new TodoClass('lasciare il corso');
+const todo8 = new TodoClass('dormire', [], new Date(), TodoPriority.HIGH)
+
+TODOS2.push(todo5);
+TODOS2.push(todo6);
+TODOS2.push(todo7);
+TODOS2.push(todo8)
 
 export const TODOS_I: TodoInterface[] = [ // array di interface 
     {
