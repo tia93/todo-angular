@@ -5,7 +5,7 @@
     <app-todo-list-element
      *ngFor="let todo of todosArray"
       [todo]="todo"
-      (onTodoCompleted)="manageTodoEmission($event)">
+      (onTodoDeleted)="manageTodoDeleted($event)">
       
     </app-todo-list-element> 
     <!-- // gurada e fa il ciclo e crea todo list element -->

@@ -1,5 +1,6 @@
 export class TodoClass {
 
+  id?: string;
   name: string;
   tags: string[];
   private readonly _creationDate: number;
@@ -56,6 +57,7 @@ done(): void{
   
   static fromDbObj(dbObject: any): TodoClass{
     const todo = new TodoClass(dbObject.name, dbObject.tags, new Date (dbObject.creationDate * 1000), dbObject.priority);
+    todo.id = dbObject.id;
     if (dbObject.doneDate) {
       todo._doneDate = dbObject.doneDate * 1000;
     }

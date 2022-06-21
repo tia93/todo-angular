@@ -14,12 +14,12 @@ export class ApiService {
 
    getTodoFromDb(){
     const url = 'https://62860d1f96bccbf32d6e2bf5.mockapi.io/todos';
-    return this.http.get<TodoClass[]>(url).pipe(
-      map(dbobjects => this.convertToTodoClass(dbobjects))
+    return this.http.get<TodoClass[]>(url).pipe(  /// chiamata al url e lo converte 
+      map(dbobjects => this.convertToTodoClass(dbobjects))  /// array generici di venta un array map
     );
    }
 
-   convertToTodoClass(dbObjectArray: any[]){
+   convertToTodoClass(dbObjectArray: any[]){  /// converti in array vuoto 
     const todoArray = [];
     for (const dbObject of dbObjectArray) {
       const newTodo = TodoClass.fromDbObj(dbObject);
@@ -29,12 +29,12 @@ export class ApiService {
   }
 
 
- fetchData(){
-return fetch('https://62860d1f96bccbf32d6e2bf5.mockapi.io/todos') ;
+//  fetchData(){
+// return fetch('https://62860d1f96bccbf32d6e2bf5.mockapi.io/todos') ;
 // .then(resp => resp.json())
 // .then(res => console.log(res))
 // .catch(err => console.log(err))
 
- }
+//  }
 
 }

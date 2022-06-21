@@ -10,19 +10,27 @@ import { DataService } from 'src/app/services/data.service';
 export class TodoListComponent implements OnInit,AfterViewInit, OnDestroy {
 
   // @Input() todos: TodoClass[];
- todosArray: TodoClass[];
+ todosArray: TodoClass[] = [];
 
 //   @Input() set todos(value: TodoClass[]){
 //  this.todosArray = value;
 //  this.orderByPiority()
 //   }
 
-  constructor(private dataServ: DataService) {
-    this.todosArray = dataServ.getActiveTodos();   /// nn prende piu dal mok ma dal server?
+  constructor(private dataServ: DataService) {   /// valore iniziare ogni volta che cambiano i todos cambia e li mette nel array e il todos array cambia e modifica html
+   dataServ.getActiveTodos().subscribe({
+    next: todos => this.todosArray = todos,
+    error: err => console.log(err)
+    
+   });
+  
+   
+   
+   /// nn prende piu dal mok ma dal server?
   }
 
   refreshArray(){
-    this.todosArray = this.dataServ.getActiveTodos();
+    // this.todosArray = this.dataServ.getActiveTodos();
   }
 
 
@@ -41,8 +49,10 @@ export class TodoListComponent implements OnInit,AfterViewInit, OnDestroy {
   }
 
   manageTodoEmission(todo: TodoClass){
-    this.refreshArray
-    this.orderByPiority();
+    this.dataServ.refreshTodos()
+
+    // this.refreshArray
+    // this.orderByPiority();
   }
   
   orderByName(){

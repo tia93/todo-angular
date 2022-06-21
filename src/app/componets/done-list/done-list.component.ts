@@ -10,12 +10,16 @@ import { DataService } from 'src/app/services/data.service';
 export class DoneListComponent implements OnInit {
 
   
-   todosArray: TodoClass[];
+   todosArray: TodoClass[] = [];
 
    
    
      constructor(private dataServ: DataService) {
-       this.todosArray = dataServ.todos;   /// nn prende piu dal mok ma dal server?
+      dataServ.getDoneTodos().subscribe({
+        next: todos => this.todosArray = todos,
+        error: err => console.log(err)
+        
+       });   
      }
    
    
@@ -24,14 +28,17 @@ export class DoneListComponent implements OnInit {
      }
 
      refreshArray(){
-      this.todosArray = this.dataServ.getActiveTodos();
+      
      }
       
      
    
-     manageTodoEmission(todo: TodoClass){
-       console.log('sono il listcomponet', todo.name);
-       this.orderByPiority();
+     manageTodoDeleted(todo: TodoClass){
+      this.dataServ.removeTodo(todo)
+
+
+      //  console.log('sono il listcomponet', todo.name);
+      //  this.orderByPiority();
      }
      
      orderByName(){
