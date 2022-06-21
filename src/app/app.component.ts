@@ -12,10 +12,10 @@ import { TODOS, TODOS2, TODOS_I } from './model/todos-mock';
 export class AppComponent implements OnInit {
 
   title = 'todo-angular';
-  todosArray: TodoClass[];
+  // todosArray: TodoClass[];
 
   constructor(){
-    this.todosArray = TODOS; 
+    // this.todosArray = TODOS; 
     
   }
 
@@ -30,9 +30,9 @@ export class AppComponent implements OnInit {
     // console.log(nuoviTodos);
   }
   
-  toLuxuryMode(){
-    this.todosArray = TODOS2 // non funziona 
-  }
+  // toLuxuryMode(){
+  //   this.todosArray = TODOS2 
+  // }
 
   getCorrectDate(timestamp: number): Date{
     const milliseconds = timestamp * 1000;

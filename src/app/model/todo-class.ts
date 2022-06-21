@@ -53,7 +53,14 @@ done(): void{
   static compareByPriority(a: TodoClass, b: TodoClass){
     return b.priority - a.priority
   }
-
+  
+  static fromDbObj(dbObject: any): TodoClass{
+    const todo = new TodoClass(dbObject.name, dbObject.tags, new Date (dbObject.creationDate * 1000), dbObject.priority);
+    if (dbObject.doneDate) {
+      todo._doneDate = dbObject.doneDate * 1000;
+    }
+    return todo;
+  }
 }
 
 // export enum TodoPriority{

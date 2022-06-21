@@ -2,6 +2,7 @@
 <button (click)="orderByDate()"> ordina data</button>
 <button (click)="orderByName()"> ordina nome</button>
 <button (click)="orderByPiority()"> ordina priorità</button>
+<button (click)="refreshArray()" >refresh</button>
 <app-todo-list-element
  *ngFor="let todo of todosArray"
   [todo]="todo"

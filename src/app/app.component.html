@@ -1,6 +1,7 @@
 <h1>{{title}}</h1>
-<button (click)="toLuxuryMode()">passa a modalità lusso</button>
-
-<app-todo-list [todos]="todosArray"></app-todo-list> 
+<!-- <button (click)="toLuxuryMode()">passa a modalità lusso</button> -->
+<app-todo-list></app-todo-list> 
+<h2>Todo completati</h2>
 <!-- // apri todo list -->
+<app-done-list></app-done-list> 
 <router-outlet></router-outlet>
