@@ -28,6 +28,6 @@ export class TodoListElementComponent implements OnInit {
   todoDeleted(): void{  // bottone per cancellare 
     this.onTodoDeleted.emit(this.todo);
   }
-
+ 
 }
 

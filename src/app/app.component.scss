@@ -1,1 +1,22 @@
+header{
+    background-color: crimson;
+    color: whitesmoke;
+    margin-bottom: 16px;
 
+}
+
+header h1{
+margin-top:  0px;
+}
+
+nav{
+    display: flex;
+    gap: 16px;
+
+}
+
+nav a {
+    color: wheat;
+    font-weight: bold;
+    text-decoration:none ;
+}

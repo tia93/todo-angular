@@ -1,7 +1,15 @@
+<header>
 <h1>{{title}}</h1>
+<nav>
+    <a routerLink="/active">Active Todos</a>  
+    <a routerLink="/done">Done Todos</a>
+</nav>
+</header>
+
+
 <!-- <button (click)="toLuxuryMode()">passa a modalità lusso</button> -->
-<app-todo-list></app-todo-list> 
-<h2>Todo completati</h2>
+<!-- <app-todo-list></app-todo-list>  -->
+
 <!-- // apri todo list -->
-<app-done-list></app-done-list> 
+<!-- <app-done-list></app-done-list>  -->
 <router-outlet></router-outlet>

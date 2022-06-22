@@ -72,4 +72,10 @@ export class DataService {
     const newarray = this.todos.value.filter(t => t !== todo);
     this.todos.next(newarray)
   }
+
+  getTodoById(id: string): Observable<TodoClass|undefined>{
+    return this.todos.pipe(
+      map(array => array.find(t => t.id === id))
+    )
+  }
 }

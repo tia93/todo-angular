@@ -2,9 +2,11 @@
 <div *ngIf="todo" [style.background-color]="todo.color"  class="todo-card"> 
   <!-- crea todo element -->
     <span>{{todo.name}}</span>
+    <a routerLink="/todo/{{todo.id}}">dettagli</a>
     <span>{{todo.creationDate}}</span>
     <span>{{todo.priority}}</span>
     <span>{{todo.description}}</span>
     <button *ngIf="todo.doneDate === null" (click)="todoCompleted()">completato</button>
     <button *ngIf="todo.doneDate !== null" (click)="todoDeleted()">elimina</button>
+   
   </div>

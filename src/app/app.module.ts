@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { TodoListComponent } from './componets/todo-list/todo-list.component';
 import { TodoListElementComponent } from './componets/todo-list-element/todo-list-element.component';
 import { DoneListComponent } from './componets/done-list/done-list.component';
+import { PageNotFoundComponent } from './componets/page-not-found/page-not-found.component';
+import { TodoDetailComponent } from './componets/todo-detail/todo-detail.component';
 
 
 @NgModule({
@@ -14,7 +16,9 @@ import { DoneListComponent } from './componets/done-list/done-list.component';
     AppComponent,
     TodoListComponent,
     TodoListElementComponent,
-    DoneListComponent
+    DoneListComponent,
+    PageNotFoundComponent,
+    TodoDetailComponent
   ],
   imports: [
     BrowserModule,
