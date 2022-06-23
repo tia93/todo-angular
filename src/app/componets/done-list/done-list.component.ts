@@ -34,7 +34,11 @@ export class DoneListComponent implements OnInit {
      
    
      manageTodoDeleted(todo: TodoClass){
-      this.dataServ.removeTodo(todo)
+      this.dataServ.removeTodo(todo).subscribe({
+        next: res => console.log('bella storia', res),
+        error: err => console.log('brutta storia' , err)
+        
+      })
 
 
       //  console.log('sono il listcomponet', todo.name);

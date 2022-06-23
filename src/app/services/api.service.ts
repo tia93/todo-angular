@@ -1,5 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { TodoClass } from '../model/todo-class';
 
@@ -8,33 +10,75 @@ import { TodoClass } from '../model/todo-class';
 })
 export class ApiService {
 
+  private readonly BASE_URL = 'https://62860d1f96bccbf32d6e2bf5.mockapi.io/todos'
+
   constructor(private http: HttpClient) {
+  }
 
-   }
-
-   getTodoFromDb(){
-    const url = 'https://62860d1f96bccbf32d6e2bf5.mockapi.io/todos';
-    return this.http.get<TodoClass[]>(url).pipe(  /// chiamata al url e lo converte 
-      map(dbobjects => this.convertToTodoClass(dbobjects))  /// array generici di venta un array map
+  getTodosFromDb(){
+    return this.http.get<TodoClass[]>(this.BASE_URL).pipe(
+      map(dbObjects => this.convertToTodoClass(dbObjects)),
+      // map(todos => this.makeVeryHigh(todos))
     );
-   }
+  }
 
-   convertToTodoClass(dbObjectArray: any[]){  /// converti in array vuoto 
+  deleteTodo(id: string): Observable<any>{
+
+    const url = this.BASE_URL + '/' + id;
+
+    return this.http.delete<any>(url)
+  }
+
+  putTodo(todo: TodoClass): Observable<TodoClass>{
+
+    const url = this.BASE_URL + '/' + todo.id;
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.http.put<TodoClass>(url, TodoClass.toDbObj(todo), httpOptions)
+  }
+
+  postTodo(todo: TodoClass): Observable<TodoClass>{
+    
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    const obj = TodoClass.toDbObj(todo)
+    
+
+    return this.http.post<TodoClass>(this.BASE_URL, obj, httpOptions).pipe(
+      map(todoObj => TodoClass.fromDbObj(todoObj))
+    )
+
+  }
+
+  // makeVeryHigh(todos: TodoClass[]){
+  //   const newArray = [];
+  //   for (const todo of todos) {
+  //     todo.priority = TodoPriority.VERYHIGH;
+  //     newArray.push(todo);
+  //   }
+  //   return newArray;
+  // }
+
+  convertToTodoClass(dbObjectArray: any[]) {
     const todoArray = [];
     for (const dbObject of dbObjectArray) {
       const newTodo = TodoClass.fromDbObj(dbObject);
-      todoArray.push(newTodo)
+      todoArray.push(newTodo);
     }
     return todoArray;
   }
 
-
-//  fetchData(){
-// return fetch('https://62860d1f96bccbf32d6e2bf5.mockapi.io/todos') ;
-// .then(resp => resp.json())
-// .then(res => console.log(res))
-// .catch(err => console.log(err))
-
-//  }
-
+  // fetchData(){
+  //   return fetch('https://628b2f12667aea3a3e290de6.mockapi.io/todos');
+  // }
 }

@@ -40,8 +40,8 @@ get doneDate(): Date | null{
 
 done(): void{
   const now = new Date();
-  this.priority = TodoPriority.DONE;
   this._doneDate = now.getTime();
+  this.priority = TodoPriority.DONE;
 }
 
 
@@ -54,14 +54,27 @@ done(): void{
   static compareByPriority(a: TodoClass, b: TodoClass){
     return b.priority - a.priority
   }
-  
   static fromDbObj(dbObject: any): TodoClass{
-    const todo = new TodoClass(dbObject.name, dbObject.tags, new Date (dbObject.creationDate * 1000), dbObject.priority);
+    const todo = new TodoClass(dbObject.name, dbObject.tags, new Date(dbObject.creationDate * 1000), dbObject.priority);
     todo.id = dbObject.id;
     if (dbObject.doneDate) {
       todo._doneDate = dbObject.doneDate * 1000;
     }
     return todo;
+  }
+
+  static toDbObj(todo: TodoClass): any{
+    const dbObject:any = {};
+    dbObject.id = todo.id;
+    dbObject.name = todo.name;
+    dbObject.tags = todo.tags;
+    dbObject.priority = todo.priority;
+    dbObject.creationDate = todo._creationDate;
+    dbObject.doneDate = todo._doneDate;
+    return dbObject
+
+
+
   }
 }
 

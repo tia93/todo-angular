@@ -19,7 +19,7 @@ export class DataService {
     // .catch( err => console.log(err))
 
     // .jeson lo fa in automatico 
-    this.apiServ.getTodoFromDb().subscribe({
+    this.apiServ.getTodosFromDb().subscribe({
       next: result => this.todos.next(result),
       error: err => console.log(err)
       
@@ -63,14 +63,31 @@ export class DataService {
   }
 
 
-  refreshTodos(){
+  completeTodo(todo: TodoClass): Observable<TodoClass>{
     const newarray = [...this.todos.value] 
     this.todos.next(newarray);
+    return this.apiServ.putTodo(todo);
   }
 
   removeTodo(todo: TodoClass){
     const newarray = this.todos.value.filter(t => t !== todo);
-    this.todos.next(newarray)
+    this.todos.next(newarray);
+    return this.apiServ.deleteTodo(todo.id!);
+  }
+
+  saveTodo(todo: TodoClass){
+    
+    if (todo.id) {
+      return this.apiServ.putTodo(todo);
+    } else {
+      return this.apiServ.postTodo(todo).pipe(
+        map(todo => {
+          const newArray = [...this.todos.value, todo];
+          this.todos.next(newArray);
+          return todo;
+        })
+      );
+    }
   }
 
   getTodoById(id: string): Observable<TodoClass|undefined>{
@@ -78,4 +95,5 @@ export class DataService {
       map(array => array.find(t => t.id === id))
     )
   }
+  
 }
