@@ -51,10 +51,9 @@ export class ApiService {
       })
     };
 
-    const obj = TodoClass.toDbObj(todo)
     
 
-    return this.http.post<TodoClass>(this.BASE_URL, obj, httpOptions).pipe(
+    return this.http.post<TodoClass>(this.BASE_URL, TodoClass.toDbObj(todo), httpOptions).pipe(
       map(todoObj => TodoClass.fromDbObj(todoObj))
     )
 
